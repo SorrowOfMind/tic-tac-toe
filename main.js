@@ -126,12 +126,14 @@ cvs.addEventListener('click', e => {
         }
     })
     
-    if (currentPlayer === 'player1') {
+    if (currentPlayer === 'player1' && playBoard[idx] === 0) {
         playBoard.splice(idx,1,options.symbolPlayer1);
         currentPlayer = options.player2;
     } else {
-        playBoard.splice(idx,1,options.symbolPlayer2);
-        currentPlayer = options.player1;
+        if (playBoard[idx] === 0) {
+            playBoard.splice(idx,1,options.symbolPlayer2);
+            currentPlayer = options.player1;
+        }
     }
 
     console.log(playBoard);
