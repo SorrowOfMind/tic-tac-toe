@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tic Tac Toe</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="main.js" defer></script>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="menu">
+                <h1 class="menu__title">TIC TAC TOE</h1>
+                <div class="options">
+                    <div class="option option__opponent">
+                        <h2 class="option__title">choose your opponent</h2>
+                        <div class="btns btns__oponent">
+                            <button class="btn btn__oponent_human" id="human">HUMAN</button>
+                            <button class="btn btn__oponent_computer" id="comp">COMPUTER</button>
+                        </div>
+                    </div>
+                    <div class=" option option__symbol">
+                        <h2 class="option__title">choose your symbol</h2>
+                        <div class="btns btns__symbol">
+                            <button class="btn btn__symbol_x" id="x">X</button>
+                            <button class="btn btn__symbol_o" id="o">O</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn__play" id="play">PLAY</button>
+            </div>
+            <canvas id="board" class="hide" width="450" height="450"></canvas>
+        </div>
+        
+    </body>
+</html>
