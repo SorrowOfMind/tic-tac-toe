@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css?family=Baloo+2:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,700&display=swap');
 
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Baloo 2', cursive; 
+    font-family: 'Quicksand', sans-serif;
 }
 
 html, body {
@@ -24,7 +24,7 @@ html, body {
 }
 
 .menu {
-    border: 2px dashed #FF8400;
+    background-color: #292f36;
     padding: 1.5rem;
     width: 450px;
     height: 450px;
@@ -36,7 +36,7 @@ html, body {
 .menu__title {
     text-align: center;
     font-size: 5rem;
-    color: #FF8400;
+    color: #d1d646;
     text-shadow: 2px 2px 1px rgba(0,0,0,0.2);
 }
 
@@ -49,6 +49,7 @@ html, body {
     padding: 0.5rem;
     text-align: center;
     font-size: 2.5rem;
+    color: #eee5e9;
 }
 
 .options {
@@ -66,33 +67,35 @@ html, body {
     padding: 0.5rem 1rem;
     font-size: 1.6rem;
     font-weight: bold;
-    background-color: transparent;
-    border: 3px solid #FF8400;
-    border-radius: 8px;
+    width: 115px;
+    background-color: #999799;
+    border: 3px solid #999799;
     cursor: pointer;
     transition: all .2s;
 }
 
 .btn:hover {
-    background-color: #FF8400;
-    color: #fff;
-    border: 3px solid #FF8400;
+    background-color: #d1d646;
+    color: #292f36;
+    border: 3px solid #d1d646;
 }
 
 .btn__play {
     font-size: 2rem;
-    width: 100%;
+    width: 70%;
+    margin: 0 auto;
 }
 
 .active {
-    background-color: #FF8400;
-    color: #fff;
+    background-color: #d1d646;
+    border: 3px solid #d1d646;
+    color: #292f36;
 }
 
 .nonvalid {
-    background-color: #E13000;
-    border: 3px solid #E13000;
-    color: #fff;
+    background-color: #ff4242;
+    border: 3px solid #ff4242;
+    color: #eee5e9;
 }
 
 .hide {

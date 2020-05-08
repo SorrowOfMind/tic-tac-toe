@@ -18,6 +18,12 @@ const options = {
     symbolPlayer2: ''
 }
 
+const xImg = new Image();
+xImg.src = './assets/x.png';
+
+const oImg = new Image();
+oImg.src = './assets/o.png';
+
 //btns handling
 humanOpponent.addEventListener('click', () => {
     options.player2 = 'human';
@@ -72,8 +78,8 @@ play.addEventListener('click', () => {
     } else {
         menu.classList.add('hide');
         cvs.classList.remove('hide');
+        startGame();
     }
-    startGame();
     console.log(options);
 });
 
@@ -93,14 +99,24 @@ const board = {
 
 let playBoard = Array(9).fill(0);
 
+const winningCombos = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6]
+];
+
 //draw board
 const drawBoard = () => {
-    ctx.strokeStyle = '#E13000';
+    ctx.strokeStyle = '#292f36';
     for (let i=0; i < board.map.length; i++) {
         ctx.strokeRect((i % board.col) * SIZE, Math.floor(i / board.col) * SIZE, SIZE, SIZE);
     }
 }
-
 
 let currentPlayer;
 
@@ -115,8 +131,12 @@ const chooseCurrentPlayer = () => {
     }
 }
 
-cvs.addEventListener('click', e => {
+const drawSymbol = (symbol, index) => {
+    let img = symbol === 'x' ? xImg : oImg;
+    ctx.drawImage(img, board.map[index][0] * SIZE,board.map[index][1] * SIZE)
+}
 
+cvs.addEventListener('click', e => {
     let posX = Math.floor((e.clientX - cvs.getBoundingClientRect().x) / SIZE);
     let posY = Math.floor((e.clientY - cvs.getBoundingClientRect().y) / SIZE);
 
@@ -128,15 +148,32 @@ cvs.addEventListener('click', e => {
     
     if (currentPlayer === 'player1' && playBoard[idx] === 0) {
         playBoard.splice(idx,1,options.symbolPlayer1);
+        drawSymbol(options.symbolPlayer1, idx);
         currentPlayer = options.player2;
     } else {
         if (playBoard[idx] === 0) {
             playBoard.splice(idx,1,options.symbolPlayer2);
+            drawSymbol(options.symbolPlayer2, idx);
             currentPlayer = options.player1;
         }
     }
 
+    let xArr = playBoard.reduce((acc,val,idx) => {
+        if (val === 'x') {
+           acc.push(idx);
+        }
+        return acc;
+    }, []);
+
+    let oArr = playBoard.reduce((acc,val,idx) => {
+        if (val === 'o') {
+           acc.push(idx);
+        }
+        return acc;
+    }, []);
+    
     console.log(playBoard);
+    console.log(xArr, oArr);
 })
 
 drawBoard();
