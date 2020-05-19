@@ -9,8 +9,8 @@
     </head>
     <body>
         <div class="wrapper">
-            <div class="menu">
-                <h1 class="menu__title">TIC TAC TOE</h1>
+            <div class="box menu">
+                <h1 class="title menu__title">TIC TAC TOE</h1>
                 <div class="options">
                     <div class="option option__opponent">
                         <h2 class="option__title">choose your opponent</h2>
@@ -29,8 +29,14 @@
                 </div>
                 <button class="btn btn__play" id="play">PLAY</button>
             </div>
+            <div id="game-over" class="box hide">
+                <h2 id="winnerText" class="title"></h2>
+                <p id="winner-symbol" class="winner-symbol"></p>
+                <button class="btn btn__play" id="play-again">PLAY AGAIN?</button>
+            </div>
+            <div class="pop-up hide" id="popup"></div>
             <canvas id="board" class="hide" width="450" height="450"></canvas>
         </div>
-        
+
     </body>
 </html>

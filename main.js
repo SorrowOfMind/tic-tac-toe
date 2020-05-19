@@ -5,12 +5,18 @@ const compOpponent = document.getElementById('comp');
 const x = document.getElementById('x');
 const o = document.getElementById('o');
 const play = document.getElementById('play');
+const gameOver = document.getElementById('game-over');
+const winner = document.getElementById('winnerText');
+const winnerSymbol = document.getElementById('winner-symbol');
+const playAgain = document.getElementById('play-again');
+const popup = document.getElementById('popup');
 
 //canvas
 const cvs = document.getElementById('board');
 const ctx = cvs.getContext('2d');
 
 //game options
+let currentPlayer;
 const options = {
     player1: 'player1',
     player2: '',
@@ -68,6 +74,25 @@ o.addEventListener('click', () => {
     o.classList.add('active');
 });
 
+
+const chooseCurrentPlayer = () => {
+    let random = Math.floor(Math.random() * 101);
+    if(random >= 50) {
+        return currentPlayer = options.player1;
+    } else {
+        return currentPlayer = options.player2;
+    }
+}
+
+const showPopup = () => {
+    popup.classList.remove('hide');
+    currentPlayer === options.player1 ? popup.textContent = `Player 1 starts` : popup.textContent = `Player 2 starts`;
+    setTimeout(() => {
+        popup.classList.add('hide');
+    },1500)
+}
+
+
 play.addEventListener('click', () => {
     if (options.player2 === '') {
         humanOpponent.classList.add('nonvalid');
@@ -78,13 +103,19 @@ play.addEventListener('click', () => {
     } else {
         menu.classList.add('hide');
         cvs.classList.remove('hide');
+        chooseCurrentPlayer();
+        showPopup();
         startGame();
     }
     console.log(options);
 });
 
 
+playAgain.addEventListener('click', () => {
+   location.reload();
+})
 
+//game
 function startGame() {
 
 const SIZE = 150;
@@ -115,19 +146,6 @@ const drawBoard = () => {
     ctx.strokeStyle = '#292f36';
     for (let i=0; i < board.map.length; i++) {
         ctx.strokeRect((i % board.col) * SIZE, Math.floor(i / board.col) * SIZE, SIZE, SIZE);
-    }
-}
-
-let currentPlayer;
-
-const chooseCurrentPlayer = () => {
-    let random = Math.floor(Math.random() * 101);
-    if(random >= 50) {
-        console.log('player1 starts')
-        return currentPlayer = options.player1;
-    } else {
-        console.log('player2 starts')
-        return currentPlayer = options.player2;
     }
 }
 
@@ -171,12 +189,32 @@ cvs.addEventListener('click', e => {
         }
         return acc;
     }, []);
-    
-    console.log(playBoard);
-    console.log(xArr, oArr);
+
+    const showGameOver = (winner, type) => {
+        gameOver.classList.remove('hide');
+        cvs.classList.add('hide');
+        winnerText.textContent = type;
+        winnerSymbol.textContent = winner;
+    }
+
+    if ((xArr.length + oArr.length) >= 5) {
+        let win = false;
+        for (let i = 0; i < winningCombos.length; i++) {
+            const winCheck = winningCombos[i];
+            if (xArr.includes(winCheck[0]) && xArr.includes(winCheck[1]) && xArr.includes(winCheck[2])) {
+                win = true;
+                showGameOver('X', 'The winner is');
+            }
+            if (oArr.includes(winCheck[0]) && oArr.includes(winCheck[1]) && oArr.includes(winCheck[2])) {
+                win = true;
+                showGameOver('O', 'The winner is');
+            }
+            if ((xArr.length + oArr.length) === 9 && win === false)
+                showGameOver(null, 'No winner!');
+        }
+    }
 })
 
 drawBoard();
-chooseCurrentPlayer();
 }
 
